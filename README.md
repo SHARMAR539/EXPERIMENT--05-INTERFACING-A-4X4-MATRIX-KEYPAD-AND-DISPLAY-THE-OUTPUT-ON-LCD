@@ -178,16 +178,171 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
 ![image](https://user-images.githubusercontent.com/36288975/233856904-99eb708a-c907-4595-9025-c9dbd89b8879.png)
 
 ## CIRCUIT DIAGRAM 
+
+
+<img width="1268" height="885" alt="image" src="https://github.com/user-attachments/assets/54d9a355-b5fb-45dc-a7cd-d66f76f406ab" />
+
  
 
 ## STM 32 CUBE PROGRAM :
 
+```
+#include "main.h"
+#include "lcd.h"
+#include <stdbool.h>
+
+bool col1,col2,col3,col4;
+
+void key(void);
+
+Lcd_PortType ports[] = {GPIOA,GPIOA,GPIOA,GPIOA};
+Lcd_PinType pins[] = {GPIO_PIN_3,GPIO_PIN_2,GPIO_PIN_1,GPIO_PIN_0};
+Lcd_HandleTypeDef lcd;
+
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+  while (1)
+  {
+	  key();
+  }
+}
+
+void key(){
+	lcd=Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
+
+	col1=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
+	col2=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+	col3=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+	col4=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+	Lcd_cursor(&lcd,0,1);
+
+	if(!col1){
+		Lcd_string(&lcd,"Key 7\n");
+		HAL_Delay(1000);
+	}else if(!col2){
+		Lcd_string(&lcd,"Key 8\n");
+		HAL_Delay(1000);
+	}else if(!col3){
+		Lcd_string(&lcd,"Key 9\n");
+		HAL_Delay(1000);
+	}else if(!col4){
+		Lcd_string(&lcd,"Key % \n");
+		HAL_Delay(1000);
+	}
+
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
+
+	col1=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
+	col2=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+	col3=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+	col4=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+	Lcd_cursor(&lcd,0,1);
+
+	if(!col1){
+		Lcd_string(&lcd,"Key 4\n");
+		HAL_Delay(1000);
+	}else if(!col2){
+		Lcd_string(&lcd,"Key 5\n");
+		HAL_Delay(1000);
+	}else if(!col3){
+		Lcd_string(&lcd,"Key 6\n");
+		HAL_Delay(1000);
+	}else if(!col4){
+		Lcd_string(&lcd,"Key x \n");
+		HAL_Delay(1000);
+	}
+
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
+
+	col1=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
+	col2=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+	col3=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+	col4=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+	Lcd_cursor(&lcd,0,1);
+
+	if(!col1){
+		Lcd_string(&lcd,"Key 1\n");
+		HAL_Delay(1000);
+	}else if(!col2){
+		Lcd_string(&lcd,"Key 2\n");
+		HAL_Delay(1000);
+	}else if(!col3){
+		Lcd_string(&lcd,"Key 3\n");
+		HAL_Delay(1000);
+	}else if(!col4){
+		Lcd_string(&lcd,"Key - \n");
+		HAL_Delay(1000);
+	}
+
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_RESET);
+
+	col1=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_4);
+	col2=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+	col3=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+	col4=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+	Lcd_cursor(&lcd,0,1);
+
+	if(!col1){
+		Lcd_string(&lcd,"Key ON/C \n");
+		HAL_Delay(1000);
+	}else if(!col2){
+		Lcd_string(&lcd,"Key 0\n");
+		HAL_Delay(1000);
+	}else if(!col3){
+		Lcd_string(&lcd,"Key =\n");
+		HAL_Delay(1000);
+	}else if(!col4){
+		Lcd_string(&lcd,"Key + \n");
+		HAL_Delay(1000);
+	}
+}
+
+```
+
 
 
 ## Output screen shots of proteus  :
+
+
+<img width="1261" height="885" alt="image" src="https://github.com/user-attachments/assets/379a35a2-7c56-4cc6-af1f-54bbe1263fbb" />
+
+
+
+<img width="1265" height="886" alt="image" src="https://github.com/user-attachments/assets/279419d8-83f7-492e-9791-a6d900179e2e" />
+
+
+
+<img width="1263" height="885" alt="image" src="https://github.com/user-attachments/assets/99bade77-be6e-425f-8264-5ae3b8a19d8d" />
+
+
+
  
  
  ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
+
+
+
+ <img width="1007" height="841" alt="image" src="https://github.com/user-attachments/assets/887b97da-e016-40b4-94a9-8dff84110d0d" />
+
+
+
+ 
  
  
 ## Result :
